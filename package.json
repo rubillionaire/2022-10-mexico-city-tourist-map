@@ -1,0 +1,49 @@
+{
+  "name": "2022-03-puerto-rico",
+  "version": "1.0.0",
+  "description": "",
+  "main": "data.js",
+  "scripts": {
+    "start": "budo ui.jsx --css style.css --dir public/ --ssl --cors --live",
+    "apple-touch-icon": "budo apple-touch-icon.js --live",
+    "serve": "serve public --ssl-cert ./localhost.pem --ssl-key ./localhost-key.pem",
+    "bundle": "browserify ui.jsx > public/bundle.js",
+    "watch": "watchify ui.jsx -o public/bundle.js -v",
+    "deploy": "npm run bundle && gh-pages -d public",
+    "mkcert-install": "mkcert -install",
+    "mkcert-localhost": "mkcert localhost"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+          ]
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babelify": "^10.0.0",
+    "classnames": "^2.3.1",
+    "mapbox-gl": "^2.7.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-map-gl": "^7.0.7",
+    "react-swipeable": "^6.2.0"
+  },
+  "devDependencies": {
+    "browserify": "^16.5.2",
+    "budo": "^11.6.4",
+    "gh-pages": "^3.2.3",
+    "serve": "^13.0.2",
+    "watchify": "^3.11.1"
+  }
+}
