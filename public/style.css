@@ -44,6 +44,10 @@ html, body {
   --info-pane-top-gap: calc(var(--control-padding) + var(--control-height));
   --info-pane-height: calc(100vh - var(--info-pane-top-gap));
 
+  --info-pane-top--swipe-deltaY: 0px;
+  --info-pane-top--hiding: calc(100vh + var(--info-pane-top--swipe-deltaY));
+  --info-pane-top--preview: calc(75vh + var(--info-pane-top--swipe-deltaY));
+
   position: absolute;
   width:  100%;
   height: var(--info-pane-height);
@@ -70,12 +74,12 @@ html, body {
 }
 
 .info-pane.state--hiding {
-  top: 100vh;
-  bottom: calc(-100vh - var(--info-pane-top-gap));
+  top: var(--info-pane-top--hiding);
+  bottom: calc(-var(--info-pane-top--hiding) - var(--info-pane-top-gap));
 }
 .info-pane.state--preview {
-  top: 75vh;
-  bottom: calc(75vh - var(--info-pane-height));
+  top: var(--info-pane-top--preview);
+  bottom: calc(var(--info-pane-top--preview) - var(--info-pane-height));
 }
 .info-pane.state--full {
   top: var(--info-pane-top-gap);
