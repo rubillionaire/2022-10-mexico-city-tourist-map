@@ -33615,6 +33615,7 @@ function Root() {
   };
   var infoPaneSwipeHandlers = (0, _reactSwipeable.useSwipeable)({
     onSwiping: function onSwiping(swipeEventData) {
+      swipeEventData.event.preventDefault();
       var target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane');
       var bbox = target.getBoundingClientRect();
       var top = bbox.top + swipeEventData.deltaY;
@@ -33623,12 +33624,14 @@ function Root() {
       target.style.bottom = "".concat(top, "px");
     },
     onSwipedUp: function onSwipedUp(swipeEventData) {
+      swipeEventData.event.preventDefault();
       var target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane');
       target.style.top = null;
       target.style.bottom = null;
       infoPaneStateMachine[infoPaneState].swipeUp();
     },
     onSwipedDown: function onSwipedDown(swipeEventData) {
+      swipeEventData.event.preventDefault();
       var target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane');
       target.style.top = null;
       target.style.bottom = null;

@@ -175,6 +175,7 @@ function Root () {
 
   const infoPaneSwipeHandlers = useSwipeable({
     onSwiping: (swipeEventData) => {
+      swipeEventData.event.preventDefault()
       const target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane')
       const bbox = target.getBoundingClientRect()
       const top = bbox.top + swipeEventData.deltaY
@@ -183,12 +184,14 @@ function Root () {
       target.style.bottom = `${top}px`
     },
     onSwipedUp: (swipeEventData) => {
+      swipeEventData.event.preventDefault()
       const target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane')
       target.style.top = null
       target.style.bottom = null
       infoPaneStateMachine[infoPaneState].swipeUp()
     },
     onSwipedDown: (swipeEventData) => {
+      swipeEventData.event.preventDefault()
       const target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane')
       target.style.top = null
       target.style.bottom = null
