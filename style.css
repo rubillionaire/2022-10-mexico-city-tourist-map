@@ -1,0 +1,219 @@
+@import "./mapbox-gl.css";
+
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+
+:root {
+  --color-primary: rgb(246, 0, 255);
+  --color-alternate: rgb(254, 255, 0);
+
+  --control-size: 40px;
+  --control-padding: 12px;
+  --filter-paind-control-size: calc(var(--control-size) - var(--control-padding));
+  --control-height: calc(var(--control-size) + var(--control-padding));
+  --pane-border-radius: 20px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root, .app {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+}
+
+.map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.info-pane {
+  --info-pane-top-gap: calc(var(--control-padding) + var(--control-height));
+  --info-pane-height: calc(100vh - var(--info-pane-top-gap));
+
+  position: absolute;
+  width:  100%;
+  height: var(--info-pane-height);
+  z-index: 10;
+  background-color: transparent;
+  border-radius: var(--pane-border-radius) var(--pane-border-radius) 0 0;
+  overflow: hidden;
+  color: var(--color-primary);
+
+  transition: top 0.2s ease-in-out;
+}
+
+.info-pane canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.info-pane.state--hiding {
+  top: 100vh;
+  bottom: calc(-100vh - var(--info-pane-top-gap));
+}
+.info-pane.state--preview {
+  top: 75vh;
+  bottom: calc(75vh - var(--info-pane-height));
+}
+.info-pane.state--full {
+  top: var(--info-pane-top-gap);
+  bottom: 0;
+}
+.info-pane__handle {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  pointer-events: all;
+  width: 100%;
+  height: 1em;
+  display:  flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-pane__handle-pill {
+  pointer-events: none;
+  width: 3em;
+  height: 0.5em;
+  background-color: var(--color-primary);
+  border-radius: 0.5em;
+  position: relative;
+  z-index: 1;
+}
+
+.info-pane__content {
+  width: 100%;
+  padding: 0 1em;
+  overflow-y: scroll;
+  position: relative;
+  z-index: 1;
+}
+
+.info-pane__content h6 {
+  font-size: 0.6em;
+  margin-bottom: 0;
+}
+
+.info-pane__content h6 + p,
+.info-pane__content h6 + li,
+.info-pane__content h6 + div > p {
+  margin-top:  0.2em;
+}
+
+.info-pane__content ul {
+  list-style: none;
+  padding:  0;
+}
+
+.info-pane__content li {
+  margin-bottom:  0.5em;
+}
+
+.info-pane__content a {
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--color-primary);
+}
+
+.controls {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  width: 100%;
+  padding: var(--control-padding) 1em 0 1em;
+  height: calc(var(--control-size) + var(--control-padding));
+  display: flex;
+  justify-content: center;
+}
+
+.control {
+  position: relative;
+  cursor: pointer;
+  width: var(--control-size);
+  height: var(--control-size);
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: var(--control-padding);
+  margin-bottom: var(--control-padding);
+}
+.control:last-child {
+  margin-right: 0;
+}
+
+.control canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--control-size);
+  height: var(--control-size);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.control span {
+  position: relative;
+  z-index: 1;
+}
+
+.control.state--watching,
+.control.state--active {
+  background: var(--color-alternate);
+}
+.filter-pane-wrapper {
+  position: absolute;
+  top: calc(var(--control-padding) + var(--control-size) + var(--control-padding));
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.filter-pane {
+  width: calc((var(--filter-paind-control-size) * 6) + (var(--control-padding) * 7));
+}
+.filter-pane > canvas {
+  position: absolute;
+  border-radius: var(--pane-border-radius);
+  /*opacity: 0;*/
+}
+.filter-pane-controls {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc((var(--filter-paind-control-size) * 6) + (var(--control-padding) * 7));
+  padding-top: var(--control-padding);
+  padding-left: var(--control-padding);
+  padding-right: var(--control-padding);
+  pointer-events: all;
+}
+.filter-pane-controls .control:nth-child(6n) {
+  margin-right: 0;
+}
+.filter-pane-controls .control,
+.filter-pane-controls .control canvas {
+  width: var(--filter-paind-control-size);
+  height: var(--filter-paind-control-size);
+  font-size: 0.8em;
+}
