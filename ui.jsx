@@ -132,7 +132,13 @@ function Root () {
     zoom: 7,
   }
 
-  const [viewState, setViewState] = useState(viewPuertoRico)
+  const viewMexicoCity = {
+    latitude: 19.432608,
+    longitude: -99.133209,
+    zoom: 11,
+  }
+
+  const [viewState, setViewState] = useState(viewMexicoCity)
   const [filterControlsAreShowing, setFilterControlsAreShowing] = useState(false)
   const [filteredEmoji, _setFilteredEmoji] = useState([])
   const toggleFilteredEmoji = (pressedEmoji) => {
@@ -255,6 +261,40 @@ function Root () {
     }
   })
 
+  let InfoPaneCard = () => null
+  if (selectedFeature !== undefined) {
+    InfoPaneCard = () => {
+      let infoPaneDescription = poi[selectedFeature].description
+        ? <hgroup>
+            <h6>description</h6>
+            <div dangerouslySetInnerHTML={{__html: poi[selectedFeature].description }} ></div>
+          </hgroup>
+        : null
+      return (
+        <div key="info-pane__content-wrapper">
+          <p key="info-pane__content-name">{poi[selectedFeature].icon} <strong>{poi[selectedFeature].name}</strong></p>
+          <hgroup>
+            <h6>hours</h6>
+            <p key="info-pane__content-operating">{poi[selectedFeature].operating}</p>
+          </hgroup>
+          
+          {infoPaneDescription}
+          <ul key="info-pane__content-links">
+            <h6>links</h6>
+            { poi[selectedFeature].link.map((link, i) => {
+              return (
+                <li key={`info-pane__content-link-${i}`}>
+                  <a href={link} target="_blank">
+                    {textForLink(link)}
+                  </a>
+                </li>
+              )
+            }) }
+          </ul>
+        </div>)
+    }
+  }
+
   return (
     <div className="app">
       <Map
@@ -297,23 +337,7 @@ function Root () {
         <div
           key="info-pane__content"
           className="info-pane__content">
-          { selectedFeature !== undefined
-              ? (<div key="info-pane__content-wrapper">
-                    <p key="info-pane__content-name">{poi[selectedFeature].icon} <strong>{poi[selectedFeature].name}</strong></p>
-                    <p key="info-pane__content-operating">{poi[selectedFeature].operating}</p>
-                    <ul key="info-pane__content-links">
-                      { poi[selectedFeature].link.map((link, i) => {
-                        return (
-                          <li key={`info-pane__content-link-${i}`}>
-                            <a href={link} target="_blank">
-                              {textForLink(link)}
-                            </a>
-                          </li>
-                        )
-                      }) }
-                    </ul>
-                  </div>)
-              : <p>no selected feature</p> }
+          <InfoPaneCard />
         </div>
       </CanvasBackground>
       <div
@@ -322,11 +346,11 @@ function Root () {
         <CanvasBackground
           className={"control"}
           onClick={function () {
-            setViewState(viewPuertoRico)
+            setViewState(viewMexicoCity)
             setInfoPaneState('hiding')
           }}
           draw={dotPatternImageRect}>
-          <span>🇵🇷</span>
+          <span>🇲🇽</span>
         </CanvasBackground>
         <Geolocation
           onCoordinatesChange={(coords) => {
@@ -384,5 +408,6 @@ function textForLink (link) {
   if (link.indexOf('facebook.com') > -1) return 'facebook'
   if (link.indexOf('google.com') > -1) return 'google'
   if (link.indexOf('alltrails.com') > -1) return 'all trails'
+  if (link.indexOf('linktr.ee') > -1) return 'link tree'
   return 'homepage'
 }

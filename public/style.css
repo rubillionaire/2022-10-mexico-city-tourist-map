@@ -107,6 +107,17 @@ html, body {
   z-index: 1;
 }
 
+.info-pane__content h6 {
+  font-size: 0.6em;
+  margin-bottom: 0;
+}
+
+.info-pane__content h6 + p,
+.info-pane__content h6 + li,
+.info-pane__content h6 + div > p {
+  margin-top:  0.2em;
+}
+
 .info-pane__content ul {
   list-style: none;
   padding:  0;
