@@ -33617,24 +33617,18 @@ function Root() {
     onSwiping: function onSwiping(swipeEventData) {
       swipeEventData.event.preventDefault();
       var target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane');
-      var bbox = target.getBoundingClientRect();
-      var top = bbox.top + swipeEventData.deltaY;
-      var bottom = bbox.bottom + swipeEventData.deltaY;
-      target.style.top = "".concat(top, "px");
-      target.style.bottom = "".concat(top, "px");
+      target.style.setProperty('--info-pane-top--swipe-deltaY', "".concat(swipeEventData.deltaY, "px"));
     },
     onSwipedUp: function onSwipedUp(swipeEventData) {
       swipeEventData.event.preventDefault();
       var target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane');
-      target.style.top = null;
-      target.style.bottom = null;
+      target.style.setProperty('--info-pane-top--swipe-deltaY', "0px");
       infoPaneStateMachine[infoPaneState].swipeUp();
     },
     onSwipedDown: function onSwipedDown(swipeEventData) {
       swipeEventData.event.preventDefault();
       var target = findParentNodeWithClass(swipeEventData.event.target, 'info-pane');
-      target.style.top = null;
-      target.style.bottom = null;
+      target.style.setProperty('--info-pane-top--swipe-deltaY', "0px");
       infoPaneStateMachine[infoPaneState].swipeDown();
     }
   });
