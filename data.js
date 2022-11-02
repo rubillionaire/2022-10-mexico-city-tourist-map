@@ -171,4 +171,34 @@ module.exports = [{
   address: 'Calle Gral. Prim 95, Juárez, Cuauhtémoc, 06600 Ciudad de México, CDMX, Mexico',
   coordinates: [19.4310053, -99.1562843],
   operating: 'mon-thurs 8-10 fri-sat 8-11 sun 9-3',
+}, {
+  name: 'Puesto Comida Japones by Tokyo Tacos',
+  icon: '🌮',
+  link: [
+    'https://www.google.com/maps/place/Puesto+Comida+Japones+by+Tokyo+Tacos/@19.4253128,-99.1448416,17z/data=!3m1!4b1!4m5!3m4!1s0x85d1ff07fecff695:0xb536f5af14c705!8m2!3d19.4253128!4d-99.1448415?hl=en-US',
+  ],
+  address: 'Dr. Andrade 31, Doctores, Cuauhtémoc, 06720 Ciudad de México, CDMX, Mexico',
+  coordinates: [19.4253128, -99.1448415],
+  operating: '',
+}, {
+  name: 'Molino "El Pujol"',
+  icon: '👨‍🍳',
+  link: [
+    'https://www.google.com/maps/place/Molino+%22El+Pujol%22/@19.4076748,-99.1771131,17z/data=!3m1!4b1!4m5!3m4!1s0x85d1ffbd9964fd11:0x218df69a5e981d41!8m2!3d19.4076748!4d-99.1771131?hl=en-US',
+  ],
+  address: 'Gral. Benjamín Hill 146, Hipódromo Condesa, Cuauhtémoc, 06100 Ciudad de México, CDMX, Mexico',
+  coordinates: [19.4076748, -99.1771131],
+  operating: '9-7',
+}, {
+  name: 'Handshake Speakeasy',
+  icon: '🍸',
+  link: [
+    'https://www.handshake.bar/',
+    'https://www.instagram.com/handshake_bar/',
+    'https://www.google.com/maps/place/HANDSHAKE+SPEAKEASY/@19.4243776,-99.164873,17z/data=!3m1!4b1!4m5!3m4!1s0x85d20342d2e0fb53:0xc3cdda752336b9df!8m2!3d19.4243999!4d-99.164813?hl=en-US',
+  ],
+  address: 'C. Amberes 65, Juárez, Cuauhtémoc, 06600 Ciudad de México, CDMX, Mexico',
+  coordinates: [19.4243999, -99.164813],
+  operating: 'mon-thurs 6-1 fri-sat 6-2 sun 6-12',
 }]
+
